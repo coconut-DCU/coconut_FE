@@ -44,10 +44,10 @@ class _SelectPageState extends State<SelectPage> {
         shrinkWrap: true,
         itemCount: images!.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          childAspectRatio: 1/1,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
+          crossAxisCount: 3, //1개의 행에 보여줄 사진의 개수
+          childAspectRatio: 1/1, //사진 가로세로 비율
+          mainAxisSpacing: 10, //수평
+          crossAxisSpacing: 10, //수직
         ),
 
         itemBuilder: (BuildContext context, int index){
