@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'dart:io';
+import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
 class SelectPage extends StatefulWidget {
@@ -15,16 +15,6 @@ class _SelectPageState extends State<SelectPage> {
   final List<XFile> multiImage = [];
   List<XFile>? images = [];
   
-
-  // void getMultiImage(ImageSource imageSource) async {
-  //   final List<XFile>? images = await _picker.pickMultiImage();
-  //   if (images != null) {
-  //     setState(() {
-  //       _pickedImage.addAll(images);
-  //     });
-  //   }
-  // }
-  
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -36,7 +26,7 @@ class _SelectPageState extends State<SelectPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: screenHeight * 0.13),
-              // _area(),
+              _area(),
               SizedBox(height: screenHeight * 0.3),
               bodyWidget()
             ],
@@ -69,8 +59,29 @@ class _SelectPageState extends State<SelectPage> {
                   borderRadius: BorderRadius.circular(5),
                   image: DecorationImage(
                     fit: BoxFit.cover,   //사진 크기를 Container 크기에 맞춤
-                    image: FileImage(File(images![index].path))
+                    image: FileImage(File(images![index].path)) //images 리스트안에 있는 사진들을 순서대로 표시
                   ),
+                ),
+              ),
+
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                //삭제버튼
+                child: IconButton(
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                  icon: const Icon(Icons.close,
+                  color: Colors.white,
+                  size: 15
+                  ),
+                  onPressed: (){
+                    setState(() {
+                      images!.remove(images![index]);
+                    });
+                  }
                 ),
               )
             ],
