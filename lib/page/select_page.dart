@@ -27,8 +27,9 @@ class _SelectPageState extends State<SelectPage> {
             children: [
               SizedBox(height: screenHeight * 0.13),
               _area(),
-              SizedBox(height: screenHeight * 0.3),
-              bodyWidget()
+              SizedBox(height: screenHeight * 0.55),
+              bodyWidget(),
+              SizedBox(height: screenHeight * 0.09)
             ],
           )
         )
