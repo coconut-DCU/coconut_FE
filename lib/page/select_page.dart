@@ -27,12 +27,45 @@ class _SelectPageState extends State<SelectPage> {
             children: [
               SizedBox(height: screenHeight * 0.13),
               _area(),
-              SizedBox(height: screenHeight * 0.55),
-              bodyWidget(),
-              SizedBox(height: screenHeight * 0.09)
             ],
-          )
-        )
+          ),
+        ),
+        
+        floatingActionButton: Stack(
+          children: [
+            Align(
+              alignment: Alignment(
+                Alignment.bottomRight.x, Alignment.bottomRight.y - 0.18
+              ),
+              child: FloatingActionButton(    //camera button
+                onPressed: () async {
+                  final image = await picker.pickImage(source: ImageSource.camera);
+                  if (image != null) {
+                    setState(() {
+                      images!.add(image);
+                    });
+                  }
+                },
+                heroTag: 'image0',
+                child: const Icon(Icons.camera),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: FloatingActionButton(    //photo button
+                onPressed: () async {
+                  final multiImage = await picker.pickMultiImage();
+                  setState(() {
+                    images!.addAll(multiImage);
+                  });
+                },
+                heroTag: 'image1',
+                child: const Icon(Icons.photo_album),
+              ),
+            )
+          ],
+        ),
+
       ),
     );
   }
@@ -89,52 +122,6 @@ class _SelectPageState extends State<SelectPage> {
           );
         },
       ),
-    );
-  }
-  
-  Widget bodyWidget () {
-    return Column(
-      children: [
-        _cameraButton(),
-          const SizedBox(height: 10),
-          _photoButton(),
-      ],
-    );
-  }
-
-  Widget _cameraButton() {
-    return Column(
-      children: [
-        FloatingActionButton(
-          onPressed: () async {
-           final image = await picker.pickImage(source: ImageSource.camera);
-           if (image != null) {
-             setState(() {
-               images!.add(image);
-             });
-           }
-          },
-          heroTag: 'image0',
-          child: const Icon(Icons.camera),
-        ),
-      ],
-    );
-  }
-  
-  Widget _photoButton() {
-    return Column(
-      children: [
-        FloatingActionButton(
-          onPressed: () async {
-            final multiImage = await picker.pickMultiImage();
-            setState(() {
-              images!.addAll(multiImage);
-            });
-          },
-          heroTag: 'image1',
-          child: const Icon(Icons.photo_album),
-        ),
-      ],
     );
   }
 }
