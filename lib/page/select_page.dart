@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import 'package:get/get.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
@@ -15,6 +16,23 @@ class _SelectPageState extends State<SelectPage> {
   final List<XFile> multiImage = [];
   List<XFile>? images = [];
   
+  final uploadButton = Padding(
+    padding: const EdgeInsets.symmetric(vertical: 16.0),
+    child: ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        padding: const EdgeInsets.all(15),
+        backgroundColor: Colors.purple,
+      ),
+      onPressed: () {
+
+      },
+      child: const Text("UpLoad", style: TextStyle(color: Colors.white),),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -27,10 +45,10 @@ class _SelectPageState extends State<SelectPage> {
             children: [
               SizedBox(height: screenHeight * 0.13),
               _area(),
+              uploadButton,
             ],
           ),
         ),
-        
         floatingActionButton: Stack(
           children: [
             Align(
