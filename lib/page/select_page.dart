@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:get/get.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:dio/dio.dart';
@@ -25,12 +24,13 @@ class _SelectPageState extends State<SelectPage> {
 
       String url = '127.0.0.1:8000';
       FormData formData = FormData.fromMap({
-        'file': await MultipartFile.fromFile(filePath, filename: fileName),
+        'images': await MultipartFile.fromFile(filePath, filename: fileName),
       });
 
       Response response = await dio.post(url, data: formData);
 
       try {
+
         if (response.statusCode == 200) {
           print('Image uploaded successfully');
         } else {
