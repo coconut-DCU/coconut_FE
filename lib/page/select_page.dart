@@ -22,7 +22,7 @@ class _SelectPageState extends State<SelectPage> {
       String filePath = img.path;
       String fileName = img.name;
 
-      String url = '127.0.0.1:8000';
+      String url = '127.0.0.1:8000/api/upload';
       FormData formData = FormData.fromMap({
         'images': await MultipartFile.fromFile(filePath, filename: fileName),
       });
@@ -30,7 +30,6 @@ class _SelectPageState extends State<SelectPage> {
       Response response = await dio.post(url, data: formData);
 
       try {
-
         if (response.statusCode == 200) {
           print('Image uploaded successfully');
         } else {

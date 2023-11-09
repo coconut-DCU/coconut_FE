@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 
 class Client {
   Dio init() {
-   BaseOptions options = BaseOptions(baseUrl: "http://127.0.0.1:8000"); //포트번호  변경
+   BaseOptions options = BaseOptions(baseUrl: "127.0.0.1:8000/api/upload"); //포트번호  변경
    final dio = Dio(options);
    dio.interceptors.add(CustomInterceptor());
 
