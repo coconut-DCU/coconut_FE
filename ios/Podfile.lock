@@ -7,14 +7,20 @@ PODS:
   - Flutter (1.0.0)
   - image_picker_ios (0.0.1):
     - Flutter
+  - lecle_flutter_absolute_path (0.0.1):
+    - Flutter
   - multi_image_picker (4.8.00):
     - BSImagePicker (~> 2.10.3)
+    - Flutter
+  - unique_identifier (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - lecle_flutter_absolute_path (from `.symlinks/plugins/lecle_flutter_absolute_path/ios`)
   - multi_image_picker (from `.symlinks/plugins/multi_image_picker/ios`)
+  - unique_identifier (from `.symlinks/plugins/unique_identifier/ios`)
 
 SPEC REPOS:
   trunk:
@@ -27,8 +33,12 @@ EXTERNAL SOURCES:
     :path: Flutter
   image_picker_ios:
     :path: ".symlinks/plugins/image_picker_ios/ios"
+  lecle_flutter_absolute_path:
+    :path: ".symlinks/plugins/lecle_flutter_absolute_path/ios"
   multi_image_picker:
     :path: ".symlinks/plugins/multi_image_picker/ios"
+  unique_identifier:
+    :path: ".symlinks/plugins/unique_identifier/ios"
 
 SPEC CHECKSUMS:
   BSGridCollectionViewLayout: 333dcb457a5a3bdd9212607ab5756553dcfe06cb
@@ -36,7 +46,9 @@ SPEC CHECKSUMS:
   BSImageView: a149459433a2687157d034c78e059d30ac7f2544
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
+  lecle_flutter_absolute_path: 7fd934b5b082a9d6547d79f365ae3705821091fe
   multi_image_picker: 443e776a762d7901641854043b60abf88a85d5ef
+  unique_identifier: 5b4b48cfe07a95df6aa11746944c0dce22ab5400
 
 PODFILE CHECKSUM: 70d9d25280d0dd177a5f637cdb0f0b0b12c6a189
 

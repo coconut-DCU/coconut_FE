@@ -28,8 +28,9 @@ class _SelectPageState extends State<SelectPage> {
         'file': await MultipartFile.fromFile(filePath, filename: fileName),
       });
 
+      Response response = await dio.post(url, data: formData);
+
       try {
-        Response response = await dio.post(url, data: formData);
         if (response.statusCode == 200) {
           print('Image uploaded successfully');
         } else {
@@ -57,7 +58,7 @@ class _SelectPageState extends State<SelectPage> {
         backgroundColor: Colors.purple,
       ),
       onPressed: () {
-        uploadImages;
+        uploadImages();
       },
       child: const Text("UpLoad", style: TextStyle(color: Colors.white),),
     ),
