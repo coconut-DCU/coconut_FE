@@ -46,7 +46,7 @@ class _SelectPageState extends State<SelectPage> {
   Future _navigateToOutPutPage() async {
     await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => OutPutPage())
+      MaterialPageRoute(builder: (context) => const OutPutPage())
     );
   }
 
