@@ -28,14 +28,12 @@ class _SelectPageState extends State<SelectPage> {
         'images': await MultipartFile.fromFile(filePath, filename: fileName),
       });
 
-      Response response = await dio.post(url, data: formData);
-
       try {
+        Response response = await dio.post(url, data: formData);
+
         if (response.statusCode == 200) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => OutPutPage())
-            );
+          await _navigateToOutPutPage();
+
         } else {
           print('Image upload failed');
         }
@@ -43,6 +41,13 @@ class _SelectPageState extends State<SelectPage> {
         print('Error uploding image: $e');
       }
     }
+  }
+
+  Future _navigateToOutPutPage() async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => OutPutPage())
+    );
   }
 
 
