@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:coco_music_app/page/output_page.dart';
 import 'package:dio/dio.dart';
 
 class SelectPage extends StatefulWidget {
@@ -31,7 +32,10 @@ class _SelectPageState extends State<SelectPage> {
 
       try {
         if (response.statusCode == 200) {
-          print('Image uploaded successfully');
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => OutPutPage())
+            );
         } else {
           print('Image upload failed');
         }

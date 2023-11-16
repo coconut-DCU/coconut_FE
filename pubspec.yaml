@@ -41,6 +41,7 @@ dependencies:
   dio: ^5.3.3
   lecle_flutter_absolute_path: ^0.0.2+1
   unique_identifier: ^0.3.0
+  webview_flutter: ^4.4.2
 
 dev_dependencies:
   flutter_test:
