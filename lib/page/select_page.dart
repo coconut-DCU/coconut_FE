@@ -33,7 +33,6 @@ class _SelectPageState extends State<SelectPage> {
 
         if (response.statusCode == 200) {
           await _navigateToOutPutPage();
-
         } else {
           print('Image upload failed');
         }

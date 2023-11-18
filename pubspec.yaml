@@ -42,6 +42,7 @@ dependencies:
   lecle_flutter_absolute_path: ^0.0.2+1
   unique_identifier: ^0.3.0
   webview_flutter: ^4.4.2
+  flutter_inappwebview: ^5.8.0
 
 dev_dependencies:
   flutter_test:
