@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:coco_music_app/page/start_page.dart';
 import 'package:coco_music_app/page/select_page.dart';
-import 'package:coco_music_app/page/output_page.dart';
 
 void main() {
-  //WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  //FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const HomePage());
 }
 
@@ -23,10 +20,6 @@ class HomePage extends StatelessWidget {
         name: '/select',
         page: () => const SelectPage()
         ),
-        GetPage(
-          name: '/output',
-          page:() => const OutPutPage()
-        )
       ],
       home: const StartPage()
     );

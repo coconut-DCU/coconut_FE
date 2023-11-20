@@ -23,7 +23,7 @@ class _SelectPageState extends State<SelectPage> {
       String filePath = img.path;
       String fileName = img.name;
 
-      String url = '127.0.0.1:8000/api/upload';
+      String url = 'http://127.0.0.1:8000/api/upload';
       FormData formData = FormData.fromMap({
         'images': await MultipartFile.fromFile(filePath, filename: fileName),
       });
@@ -93,9 +93,9 @@ class _SelectPageState extends State<SelectPage> {
                 onPressed: () async {
                   final image = await picker.pickImage(
                     source: ImageSource.camera,
-                    maxHeight: 75,
-                    maxWidth: 75,
-                    imageQuality: 30
+                    maxHeight: 200,
+                    maxWidth: 200,
+                    imageQuality: 100
                   );
                   if (image != null) {
                     setState(() {
@@ -112,9 +112,9 @@ class _SelectPageState extends State<SelectPage> {
               child: FloatingActionButton(    //photo button
                 onPressed: () async {
                   final multiImage = await picker.pickMultiImage(
-                    maxHeight: 75,
-                    maxWidth: 75,
-                    imageQuality: 30
+                    maxHeight: 200,
+                    maxWidth: 200,
+                    imageQuality: 100
                   );
                   setState(() {
                     images?.addAll(multiImage);
