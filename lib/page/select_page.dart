@@ -19,7 +19,8 @@ class _SelectPageState extends State<SelectPage> {
   late Dio dio = Dio();
 
   Future<void> uploadImages() async {
-    for (var img in images!) {
+    for (int i = 0; i < images!.length; i++) {
+      var img = images![i];
       String filePath = img.path;
       String fileName = img.name;
 
@@ -28,11 +29,11 @@ class _SelectPageState extends State<SelectPage> {
         'images': await MultipartFile.fromFile(filePath, filename: fileName),
       });
 
+      Response response = await dio.post(url, data: formData);
       try {
-        Response response = await dio.post(url, data: formData);
-
         if (response.statusCode == 200) {
-          await _navigateToOutPutPage();
+          //await _navigateToOutPutPage();
+          print('Successfull');
         } else {
           print('Image upload failed');
         }
@@ -40,6 +41,7 @@ class _SelectPageState extends State<SelectPage> {
         print('Error uploding image: $e');
       }
     }
+    await _navigateToOutPutPage();
   }
 
   Future _navigateToOutPutPage() async {
