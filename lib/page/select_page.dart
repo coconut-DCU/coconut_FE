@@ -19,20 +19,29 @@ class _SelectPageState extends State<SelectPage> {
   late Dio dio = Dio();
 
   Future<void> uploadImages() async {
+    // if (images != null && images!.length > 5) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(content: Text('이미지는 5장 까지만 선택할 수 있습니다.'),
+    //   ),
+    //   );
+    // }
+    List<MultipartFile> imageFiles = []; //http를 사용, 이미지 post로 전송
+
     for (int i = 0; i < images!.length; i++) {
       var img = images![i];
       String filePath = img.path;
       String fileName = img.name;
 
+      imageFiles.add(await MultipartFile.fromFile(filePath, filename: fileName));
+    }
       String url = 'http://127.0.0.1:8000/api/upload';
       FormData formData = FormData.fromMap({
-        'images': await MultipartFile.fromFile(filePath, filename: fileName),
+        'images': imageFiles,
       });
 
-      Response response = await dio.post(url, data: formData);
       try {
+        Response response = await dio.post(url, data: formData);
         if (response.statusCode == 200) {
-          //await _navigateToOutPutPage();
           print('Successfull');
         } else {
           print('Image upload failed');
@@ -40,7 +49,7 @@ class _SelectPageState extends State<SelectPage> {
       } catch (e) {
         print('Error uploding image: $e');
       }
-    }
+    //서버에서 보낸 데이터를 성공적으로 response했을 때 아래 메소드 실행
     await _navigateToOutPutPage();
   }
 
