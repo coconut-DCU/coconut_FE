@@ -19,12 +19,7 @@ class _SelectPageState extends State<SelectPage> {
   late Dio dio = Dio();
 
   Future<void> uploadImages() async {
-    // if (images != null && images!.length > 5) {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(content: Text('이미지는 5장 까지만 선택할 수 있습니다.'),
-    //   ),
-    //   );
-    // }
+
     List<MultipartFile> imageFiles = []; //http를 사용, 이미지 post로 전송
 
     for (int i = 0; i < images!.length; i++) {
