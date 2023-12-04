@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:coco_music_app/page/output_page.dart';
-import 'package:dio/dio.dart';
 
 class SelectPage extends StatefulWidget {
   const SelectPage({super.key});
@@ -71,6 +71,7 @@ class _SelectPageState extends State<SelectPage> {
         backgroundColor: Colors.purple,
       ),
       onPressed: () {
+        //이미지 추가하지 않고 눌렀을 때는 오류가 아니라 반응이 없도록 수정
         uploadImages();
       },
       child: const Text("UpLoad", style: TextStyle(color: Colors.white),),

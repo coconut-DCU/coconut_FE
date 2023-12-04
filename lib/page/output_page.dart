@@ -23,11 +23,11 @@ class _OutPutPageState extends State<OutPutPage> {
             ),
           ),
           Positioned(
-            bottom: 200,
+            bottom: 200,  //위치조절 우측하단 배치
             right:  30,
             child: FloatingActionButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(context);   //화면 뒤로 전환되었을때 기존자원 삭제 또는 리로드로 수정할것
               },
               child: const Icon(Icons.turn_left),
             ),
