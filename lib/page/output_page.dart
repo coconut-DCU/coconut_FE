@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:coco_music_app/page/start_page.dart';
 
 class OutPutPage extends StatefulWidget {
   const OutPutPage({super.key});
@@ -27,7 +28,12 @@ class _OutPutPageState extends State<OutPutPage> {
             right:  30,
             child: FloatingActionButton(
               onPressed: () {
-                Navigator.pop(context);   //화면 뒤로 전환되었을때 기존자원 삭제 또는 리로드로 수정할것
+                Navigator.pushReplacement( //현재page를 stack에서 제거하고 페이지 이동
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const StartPage()
+                ),
+              );
               },
               child: const Icon(Icons.turn_left),
             ),
