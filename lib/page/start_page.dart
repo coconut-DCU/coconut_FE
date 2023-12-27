@@ -14,7 +14,9 @@ class StartPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(25)
           ),
           padding: const EdgeInsets.all(15),
-          backgroundColor: const Color.fromARGB(255, 205, 127, 196)
+          //backgroundColor: 
+          //backgroundColor: ColoredBox(color: ColorScheme.fromSeed(seedColor: Colors.purple))
+          //Color.fromARGB(255, 205, 127, 196)
         ),
         onPressed: () => Get.toNamed('/select'),
         child: const Text('시작하기', style: TextStyle(color: Colors.black)),
@@ -29,8 +31,9 @@ class StartPage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 50.5, right: 50.5),
           children: [
             const SizedBox(height: 50),
-            const Text('data',
-            style:  TextStyle(fontSize: 35.0, fontWeight: FontWeight.w600)),
+            const Text('당신의 상황에 맞는 음악을 찾아드립니다!',
+            style:  TextStyle(fontSize: 35.0)),
+            //style:  TextStyle(fontSize: 35.0, fontWeight: FontWeight.w600)),
             const SizedBox(height: 550.0),
             startButton
           ],
