@@ -17,6 +17,7 @@ class _SelectPageState extends State<SelectPage> {
   final List<XFile> multiImage = [];
   List<XFile>? images = [];
   late Dio dio = Dio();
+  List<String> urlList = [];
 
   Future<void> uploadImages() async {
 
@@ -37,7 +38,10 @@ class _SelectPageState extends State<SelectPage> {
       try {
         Response response = await dio.post(url, data: formData);
         if (response.statusCode == 200) {
-          print('Successfull');
+          //url List 수신
+          urlList = List<String>.from(response.data["song_urls"]);
+
+          //print('URL List: $urlList'); 디버깅 코드
         } else {
           print('Image upload failed');
         }
@@ -51,7 +55,7 @@ class _SelectPageState extends State<SelectPage> {
   Future _navigateToOutPutPage() async {
     await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const OutPutPage())
+      MaterialPageRoute(builder: (context) => OutPutPage(urlList))
     );
   }
 

@@ -31,10 +31,10 @@ class StartPage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 50.5, right: 50.5),
           children: [
             const SizedBox(height: 50),
-            const Text('당신의 상황에 맞는 음악을 찾아드립니다!',
+            const Text('\n당신과 어울리는 \n음악을 \n찾아드립니다!',
             style:  TextStyle(fontSize: 35.0)),
             //style:  TextStyle(fontSize: 35.0, fontWeight: FontWeight.w600)),
-            const SizedBox(height: 550.0),
+            const SizedBox(height: 450.0),
             startButton
           ],
         ),
