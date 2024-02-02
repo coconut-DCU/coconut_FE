@@ -1,21 +1,147 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
-import 'package:dio/dio.dart';
+//import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
-import 'package:coco_music_app/page/output_page.dart';
+//import 'package:coco_music_app/page/output_page.dart';
 
 class SelectPage extends StatelessWidget {
   SelectPage({super.key});
   final ImagePicker picker = ImagePicker();
-  final List<XFile> images = []; // 변경된 부분: images를 RxList로 변경
-
-  final Dio dio = Dio();
-  final List<String> urlList = []; // 변경된 부분: urlList를 RxList로 변경
+  final RxList<XFile> images = <XFile>[].obs; 
+  late final XFile? image;
+  //final Dio dio = Dio();
+  //final List<String> urlList = []; // 변경된 부분: urlList를 RxList로 변경
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    final uploadButton = Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          padding: const EdgeInsets.all(15),
+          backgroundColor: Colors.purple,
+        ),
+        onPressed: () {
+          //http
+          //uploadImages();
+        },
+        child: const Text("Upload", style: TextStyle(color: Colors.white))
+      ),
+    );
+
+    return MaterialApp(
+      home: Scaffold(
+        body: SingleChildScrollView( //스크롤이 가능한 UI
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: screenHeight * 0.13),
+              _area(),
+              uploadButton,
+            ],
+          ),
+        ),
+        floatingActionButton: Stack(
+          children: [
+            Align(      //카메라 버튼
+              alignment: Alignment(Alignment.bottomRight.x, Alignment.bottomRight.y - 0.18),
+              child: FloatingActionButton(
+                onPressed: () async {
+                  final image = await picker.pickImage(
+                    source: ImageSource.camera,
+                    maxHeight: 200,
+                    maxWidth: 200,
+                    imageQuality: 100
+                  );
+                  if(image != null) {
+                    images.add(image);
+                  //setState((){
+                  //images?.add(image);
+                  //});
+                  }
+                },
+                heroTag: 'Image0',
+                child: const Icon(Icons.camera),
+              ),
+            ),
+            Align(      //앨범 버튼
+              alignment: Alignment.bottomRight,
+              child: FloatingActionButton(
+                onPressed: () async {
+                  final multiImage = await picker.pickMultiImage(
+                    maxHeight: 200,
+                    maxWidth: 200,
+                    imageQuality: 100
+                  );
+                  images.addAll(multiImage);
+                  // Setstate((){
+                  //   images?.addAll(multiImage);
+                  // });
+                },
+                heroTag: 'image1',
+                child: const Icon(Icons.photo_album),
+              ),
+            )
+          ],
+        )
+      )
+    );
+  }
+
+  Widget _area() {
+    return Container(
+      margin: const EdgeInsets.all(10),
+      child: GridView.builder(
+        padding: const EdgeInsets.all(10),
+        shrinkWrap: true,
+        itemCount: images.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          childAspectRatio: 1/1,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10
+        ),
+        itemBuilder: (BuildContext context, int index) {
+          return Stack(
+            alignment: Alignment.topRight,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    //이미지 띄우는 부분 작동 안함
+                    //Obx적용 해야함
+                    image: FileImage(File(images[index].path))
+                  ),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: IconButton(
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                  icon: const Icon(Icons.close, color: Colors.white, size: 15,),
+                  onPressed: (){
+                    images.remove(images[index]);
+                    // setState((){
+                    //   images!.remove(images![index]);
+                    // });
+                  },
+                )
+              )
+            ],
+          );
+        },
+      ),
+    );
   }
 }
 

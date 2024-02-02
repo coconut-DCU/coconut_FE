@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:coco_music_app/page/start_page.dart';
-import 'dart:math';
+//import 'dart:math';
 
 class OutPutPage extends StatefulWidget {
   final List<String> urlList = []; 
@@ -12,7 +12,8 @@ class OutPutPage extends StatefulWidget {
 }
 
 class _OutPutPageState extends State<OutPutPage> {
-  List<String> url = urlList;
+ // List<String> url = urlList;
+
   //late List<String> selectUrlList = [];
   //var selectUrlList = widget.urlList.isNotEmpty; //
   //List<String> urlList = widget.urlList;
@@ -25,7 +26,8 @@ class _OutPutPageState extends State<OutPutPage> {
   //       ? widget.urlList[Random().nextInt(widget.urlList.length)]
   //       : 'https://www.youtube.com/watch?v=25GKbFqKQAI';
   // }
-  var outUrl = urlList[Random().nextInt(5)];
+
+ // var outUrl = urlList[Random().nextInt(5)];
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class _OutPutPageState extends State<OutPutPage> {
           InAppWebView(
             initialUrlRequest: URLRequest(
               //  url: WebUri('https://www.youtube.com/watch?v=25GKbFqKQAI')
-              url: WebUri(selectedUrl)
+              // url: WebUri(selectedUrl)
             ),
           )
         ],
