@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
       getPages: [
         GetPage(
         name: '/select',
-        page: () => const SelectPage()
+        page: () => SelectPage()
         ),
       ],
       home: const StartPage()
