@@ -1,8 +1,11 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'dart:io';
 //import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
+//import 'package:http/http.dart'
 //import 'package:coco_music_app/page/output_page.dart';
 
 class SelectPage extends StatelessWidget {
@@ -10,8 +13,48 @@ class SelectPage extends StatelessWidget {
   final ImagePicker picker = ImagePicker();
   final RxList<XFile> images = <XFile>[].obs; 
   late final XFile? image;
-  //final Dio dio = Dio();
+  final Dio dio = Dio();
   //final List<String> urlList = []; // 변경된 부분: urlList를 RxList로 변경
+
+  Future<void> uploadImages() async {
+    List<MultipartFile> imageFiles = [];
+
+    for (int i = 0; i < images.length; i++){
+      var img = images[i];
+      String filePath = img.path;
+      String fileName = img.name;
+
+      imageFiles.add(await MultipartFile.fromFile(filePath, fileName));
+    }
+    String url = 'http://127.0.0.1:8000/api/upload';
+    FormDate formDate = FromData.fromMap({
+      'images': imageFiles,
+    });
+
+    try {
+      Response response = await dio.post(url, data:formData);
+      if(response.statusCode == 200) {
+        print('success');
+      } else {
+        print('image upload failed');
+      }
+    } catch (e) {
+      print('Error uploading image: $e');
+    }
+
+    await _navigateToOutPutPage();
+  }
+
+  Future _navigateToOutPutPage() async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => OutputPage())
+    );
+  }
+
+
+  //네비게이터 사용x getx를 사용할 수 있도록 수정
+  //form 구문 오류 해결
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +102,6 @@ class SelectPage extends StatelessWidget {
                   );
                   if(image != null) {
                     images.add(image);
-                  //setState((){
-                  //images?.add(image);
-                  //});
                   }
                 },
                 heroTag: 'Image0',
@@ -78,9 +118,6 @@ class SelectPage extends StatelessWidget {
                     imageQuality: 100
                   );
                   images.addAll(multiImage);
-                  // Setstate((){
-                  //   images?.addAll(multiImage);
-                  // });
                 },
                 heroTag: 'image1',
                 child: const Icon(Icons.photo_album),
@@ -95,7 +132,8 @@ class SelectPage extends StatelessWidget {
   Widget _area() {
     return Container(
       margin: const EdgeInsets.all(10),
-      child: GridView.builder(
+      child: Obx(() => 
+      GridView.builder(
         padding: const EdgeInsets.all(10),
         shrinkWrap: true,
         itemCount: images.length,
@@ -114,8 +152,6 @@ class SelectPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5),
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    //이미지 띄우는 부분 작동 안함
-                    //Obx적용 해야함
                     image: FileImage(File(images[index].path))
                   ),
                 ),
@@ -131,9 +167,6 @@ class SelectPage extends StatelessWidget {
                   icon: const Icon(Icons.close, color: Colors.white, size: 15,),
                   onPressed: (){
                     images.remove(images[index]);
-                    // setState((){
-                    //   images!.remove(images![index]);
-                    // });
                   },
                 )
               )
@@ -141,6 +174,7 @@ class SelectPage extends StatelessWidget {
           );
         },
       ),
+      )
     );
   }
 }
