@@ -4,8 +4,7 @@ import 'package:coco_music_app/page/start_page.dart';
 //import 'dart:math';
 
 class OutPutPage extends StatefulWidget {
-  final List<String> urlList = []; 
-  OutPutPage(List<String> urlList, {super.key});
+  const OutPutPage({super.key});
 
   @override
   State<OutPutPage> createState() => _OutPutPageState();
@@ -45,8 +44,7 @@ class _OutPutPageState extends State<OutPutPage> {
         children: [
           InAppWebView(
             initialUrlRequest: URLRequest(
-              //  url: WebUri('https://www.youtube.com/watch?v=25GKbFqKQAI')
-              // url: WebUri(selectedUrl)
+              url: WebUri('https://www.youtube.com/watch?v=25GKbFqKQAI')
             ),
           )
         ],
