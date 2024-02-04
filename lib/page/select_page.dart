@@ -1,17 +1,15 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'dart:io';
-//import 'package:dio/dio.dart';
+import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' as getx;
 //import 'package:http/http.dart'
-//import 'package:coco_music_app/page/output_page.dart';
+import 'package:coco_music_app/page/output_page.dart';
 
 class SelectPage extends StatelessWidget {
   SelectPage({super.key});
   final ImagePicker picker = ImagePicker();
-  final RxList<XFile> images = <XFile>[].obs; 
+  final getx.RxList<XFile> images = <XFile>[].obs; 
   late final XFile? image;
   final Dio dio = Dio();
   //final List<String> urlList = []; // 변경된 부분: urlList를 RxList로 변경
@@ -24,10 +22,10 @@ class SelectPage extends StatelessWidget {
       String filePath = img.path;
       String fileName = img.name;
 
-      imageFiles.add(await MultipartFile.fromFile(filePath, fileName));
+      imageFiles.add(await MultipartFile.fromFile(filePath, filename: fileName));
     }
     String url = 'http://127.0.0.1:8000/api/upload';
-    FormDate formDate = FromData.fromMap({
+    FormData formData = FormData.fromMap({
       'images': imageFiles,
     });
 
@@ -42,19 +40,8 @@ class SelectPage extends StatelessWidget {
       print('Error uploading image: $e');
     }
 
-    await _navigateToOutPutPage();
+    getx.Get.to(OutPutPage);
   }
-
-  Future _navigateToOutPutPage() async {
-    await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => OutputPage())
-    );
-  }
-
-
-  //네비게이터 사용x getx를 사용할 수 있도록 수정
-  //form 구문 오류 해결
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +119,7 @@ class SelectPage extends StatelessWidget {
   Widget _area() {
     return Container(
       margin: const EdgeInsets.all(10),
-      child: Obx(() => 
+      child: getx.Obx(() => 
       GridView.builder(
         padding: const EdgeInsets.all(10),
         shrinkWrap: true,
