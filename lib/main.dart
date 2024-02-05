@@ -16,10 +16,8 @@ class HomePage extends StatelessWidget {
       title: 'Music App',
       //theme
       getPages: [
-        GetPage(
-        name: '/select',
-        page: () => SelectPage()
-        ),
+        GetPage(name: '/select', page: () => SelectPage()),
+        GetPage(name: '/start', page: () => StartPage()),
       ],
       home: const StartPage()
     );

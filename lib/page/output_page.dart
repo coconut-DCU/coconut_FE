@@ -1,61 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:coco_music_app/page/start_page.dart';
-//import 'dart:math';
+import 'package:get/get.dart';
+import 'dart:math';
 
-class OutPutPage extends StatefulWidget {
+class OutPutPage extends StatelessWidget {
   const OutPutPage({super.key});
 
   @override
-  State<OutPutPage> createState() => _OutPutPageState();
-}
-
-class _OutPutPageState extends State<OutPutPage> {
- // List<String> url = urlList;
-
-  //late List<String> selectUrlList = [];
-  //var selectUrlList = widget.urlList.isNotEmpty; //
-  //List<String> urlList = widget.urlList;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // 초기에는 urlList가 비어있을 수 있으므로 예외 처리
-  //   var selectedUrl = widget.urlList.isNotEmpty
-  //       ? widget.urlList[Random().nextInt(widget.urlList.length)]
-  //       : 'https://www.youtube.com/watch?v=25GKbFqKQAI';
-  // }
-
- // var outUrl = urlList[Random().nextInt(5)];
-
-  @override
   Widget build(BuildContext context) {
+    List<String> urlList = Get.arguments ?? []; //null 일경우 [](빈 리스트)를 사용
+
+    String randomUrl = urlList.isEmpty     //random으로 추출한 url을 randomUrl에 담아서 사용
+    ? 'https://www.youtube.com/?bp=wgUCEAE%3D' 
+    : urlList[Random().nextInt(urlList.length)];
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.pushReplacement(
-          context, MaterialPageRoute(
-            builder: (context) => const StartPage()
-          ));
-      },
-      child: const Icon(Icons.turn_left)),
+        onPressed: () => Get.toNamed('/start'),
+        child: const Icon(Icons.turn_left),
+      ),
 
       body: Stack(
         children: [
           InAppWebView(
             initialUrlRequest: URLRequest(
-              url: WebUri('https://www.youtube.com/watch?v=25GKbFqKQAI')
+              url: WebUri(randomUrl)
             ),
           )
         ],
       )
-          // Expanded(  
-          //   child:InAppWebView(
-          //   initialUrlRequest: URLRequest(
-          //     url: WebUri('https://www.youtube.com/watch?v=25GKbFqKQAI')
-          //   ),
-          //   ),
-          // )
     );
   }
 }

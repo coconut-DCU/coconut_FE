@@ -11,7 +11,6 @@ class SelectPage extends StatelessWidget {
   final getx.RxList<XFile> images = <XFile>[].obs; 
   late final XFile? image;
   final Dio dio = Dio();
-  //final List<String> urlList = []; // 변경된 부분: urlList를 RxList로 변경
 
   Future<void> uploadImages() async {
     List<MultipartFile> imageFiles = [];
@@ -31,8 +30,9 @@ class SelectPage extends StatelessWidget {
     try {
       Response response = await dio.post(url, data:formData);
       if(response.statusCode == 200) {
+        List<String> urlList = List<String>.from(response.data["song_urls"]);
         print('success');
-        getx.Get.to(const OutPutPage());
+        getx.Get.to(() => const OutPutPage(), arguments: urlList);
       } else {
         print('image upload failed');
       }
